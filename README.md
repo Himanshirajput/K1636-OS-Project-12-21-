@@ -77,7 +77,6 @@ keeps the order of execution of all the processes. Compute average waiting and
 turnaround time.
 
 #include<stdio.h> 
- 
 int main() 
 { 
  
