@@ -8,3 +8,67 @@ schedule processes having short execution time first. CPU is idle for 3 time uni
 does not entertain any process prior this time. Scheduler must maintain a queue that
 keeps the order of execution of all the processes. Compute average waiting and
 turnaround time.
+
+#include<stdio.h>
+ 
+void main()
+{
+    int burst_time,p[20],waiting_time[20],turnaroundtime[20],i,j,n,total=0,pos,temp;
+    float avg_wt,avg_tat;
+    printf("Enter number of process:");
+    scanf("%d",&n);
+ 
+    printf("\nEnter Burst Time:\n");
+    for(i=0;i<n;i++)
+    {
+        printf("p%d:",i+1);
+        scanf("%d",&burst_time[i]);
+        p[i]=i+1;           //contains process number
+    }
+ 
+    //sorting burst time in ascending order using selection sort
+    for(i=0;i<n;i++)
+    {
+        pos=i;
+        for(j=i+1;j<n;j++)
+        {
+            if(burst_timt[j]<burst_time[pos])
+                pos=j;
+        }
+ 
+        temp=bt[i];
+        burst_time[i]=burst_time[pos];
+        burst_time[pos]=temp;
+ 
+        temp=p[i];
+        p[i]=p[pos];
+        p[pos]=temp;
+    }
+ 
+    waiting_time[0]=3;            //waiting time for first process will be 3time units
+ 
+    //calculate waiting time
+    for(i=1;i<n;i++)
+    {
+        Waiting_time[i]=0;
+        for(j=0;j<i;j++)
+            waiting_time[i]+=burst_time[j];
+ 
+        total+=waiting_time[i];
+    }
+ 
+    avg_wt=(float)total/n;      //average waiting time
+    total=0;
+ 
+    printf("\nProcess\t    Burst Time    \tWaiting Time\tTurnaround Time");
+    for(i=0;i<n;i++)
+    {
+        turnaroundtime[i]=burst_time[i]+waiting_time[i];     //calculate turnaround time
+        total+=turnaroundtime[i];
+        printf("\np%d\t\t  %d\t\t    %d\t\t\t%d",p[i],burst_time[i],waiting_time[i],turnaroundtime[i]);
+    }
+ 
+    avg_tat=(float)total/n;     //average turnaround time
+    printf("\n\nAverage Waiting Time=%f",avg_wt);
+    printf("\nAverage Turnaround Time=%f\n",avg_tat);
+}
